@@ -18,10 +18,7 @@ class BaseSerializer(serializers.ModelSerializer):
 
     def get_image(self, course):#Them static vao hinh
         if course.image:
-            request = self.context.get('request')
-            if request:
-                return request.build_absolute_uri('/static/%s' % course.image.name)
-            return '/static/%s' % course.image.name
+            return course.image.url
 class CourseSerializer(BaseSerializer):
     class Meta:
         model = Course
