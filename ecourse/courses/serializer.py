@@ -25,7 +25,7 @@ class BaseSerializer(serializers.ModelSerializer):
 class CourseSerializer(BaseSerializer):
     class Meta:
         model = Course
-        fields = ['id', 'name']
+        fields = '__all__'
 
 class LessonSerializer(BaseSerializer):
     class Meta:
