@@ -28,7 +28,7 @@ class Category(BaseModel):
 class Course(BaseModel):
     name = models.CharField(max_length=50, null=False)
     description = RichTextField()
-    image = CloudinaryField('course', null=True)
+    image = models.ImageField(upload_to="courses/%Y/%m", null = True)
     category = models.ForeignKey(Category,related_name="courses", on_delete=models.RESTRICT, null=True)
     tags = models.ManyToManyField('Tag')
     def __str__(self):
@@ -40,7 +40,7 @@ class Course(BaseModel):
 class Lesson(BaseModel):
     name = models.CharField(max_length=50, null=False)
     description = RichTextField()
-    image = CloudinaryField('lesson', null=True)
+    image = models.ImageField(upload_to="lesson/%Y/%m", null=True)
     course = models.ForeignKey(Course, on_delete=models.RESTRICT, null=True)
     tags = models.ManyToManyField('Tag')
 
