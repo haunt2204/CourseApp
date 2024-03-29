@@ -16,9 +16,13 @@ class BaseSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField(source='image')
     tags = TagSerializer(many=True)# De len tag
 
-    def get_image(self, course):#Them static vao hinh
-        if course.image:
-            return course.image.url
+    def get_image(self, obj):
+        request = self.context.get('request')
+        if obj.image:
+            if request:
+                return request.build_absolute_uri("/static/%s" % obj.image.name)
+            return "/static/%s" % obj.image.name
+
 class CourseSerializer(BaseSerializer):
     class Meta:
         model = Course
